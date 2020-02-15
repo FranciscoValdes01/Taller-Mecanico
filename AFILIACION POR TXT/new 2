@@ -1,0 +1,295 @@
+PROGRAM:
+*/Diseño
+Pseudocódigo
+ENCABEZADO
+Nombre: archivo indexado 2
+Autor: COWORKERS COMPANY
+Fecha de creación: 10/04/2019
+Fecha de última modificación: 10/04/2019
+Types
+datosafiliadoest = Record
+	folio: integer;
+	nombre:string; 
+	apellidop:string; 
+	apellidom:string; 
+	curp:string; 
+llave:entera
+	sexo: string; 
+	numerodomicilio:integer;
+	calle:string; 
+	colonia:string; 
+	municipio:string; 
+	dia,mes,anio,ds:integer;
+	dia2,mes2,anio2,ds2:integer;
+	numregistro:integer; 
+end
+
+nodoarbol_reg=record
+	izq:integer;
+numregistro:integer;
+Llave:integer;
+der:integer;
+end
+var
+	Arcsalida: file of datosafiliadoest
+	arcindice:file of nodoarbol_reg
+	estrindice_dir:nodoarbol_dir
+     X:^nodoarbol_dir
+     estrindice_reg:nodoarbol_reg
+	datosafiliado:datosafiliadoest 
+	temp:datosafiliadoest
+     Aux:^nodoarbol_dir
+Aux2:^nodoarbol_dir
+	linea:string; 
+	clave2:string; 
+	contador: integer;
+	i: integer;
+	correcto: integer;
+	nombreclave:string; 
+	apellidopclave:string; 
+	apellidomclave:string; 
+	seleccion:integer;
+	respuesta:integer;
+	tam:integer;
+	tamreal:integer;
+	promediocolisiones:integer;
+	reasignacion:integer;
+	FUNCIONES
+procedure afiliarse()
+procedure menu()
+function buscarcurp():integer;
+procedure guardar(contador:integer;)
+procedure impresion()
+program: RegistroSeguroPopular
+begin
+     Inicioprograma()
+	Menú ()  							
+end
+procedure menú()
+
+var
+	seleccion: integer;
+	
+begin
+write    “BIENVENIDO”
+write  ` ESCRIBE EL NUMERO DEL procedure A 
+				REALIZAR”
+write  ` 1: AFILIACION”
+write “dar de baja”
+write “3: close program:
+	read selección
+	
+	case selección do
+		1: afiliarse ()		
+2:eliminarnodo_reg()					
+          3: guardar_arbol()
+		De otro modo: Menú ()					
+	end case
+end
+
+procedure inicioPrograma()
+begin
+  Reservar(x)
+	tam := 100
+asignar(‘indice.indx’,arcindice)
+asignar(‘Registroafiliados.dat’,arcsalida)
+
+if archivo (arcindice) no existe then
+	create(‘indice.indx’,arcindice)
+Crear_esqueletoindice()
+end if
+
+if archivo (arcsalida) no existe then
+	create(‘Registroafiliados.dat’,arcsalida)
+ Crear_esqueleto()
+end if
+close(arcsalida)
+close(arcindice)
+end
+
+procedure crear_esqueletoindice()
+begin
+open(arcindice/lectura-escritura)
+	estrindice_reg.izq:integer;
+estrindice_reg numregistro:integer;
+estrindice_reg Llave:integer;
+estrindice_reg der:integer;
+
+	for i=1 to tam do
+		write(estrindice,arcindice)
+	end
+	
+	close(arcindice)
+
+end
+
+procedure afiliarse()
+
+begin
+	write `Ingrese Curp`
+	read(datosafiliado.curp)
+	correcto:=buscarcurp()	
+
+	if correcto = 1 then
+		write ` ya se encuentra en el sistema`
+		menu()		
+	end		
+	write(`Digite Nombre completo`)	
+	read(datosafiliado.nombre)
+
+write(`Ingrese fecha de nacimiento dia/mes/año: como 051097`)
+	read(datosafiliado.llave)
+	
+	write(`Sexo 1.-Hombre    2.-Mujer`)
+	read respuesta
+
+	if (respuesta=1)then
+		datosafiliado.sexo := `Hombre`
+	else
+		 datosafiliado.sexo := `Mujer`
+	end
+
+	write `NUMERO DEL DOMICILIO”
+	read (datosafiliado.numerodomicilio)
+
+write `CALLE DEL DOMICILIO*`
+	read (datosafiliado.calle)
+
+	write `COLONIA DEL DOMICILIO*`
+	read (datosafiliado.colonia)
+
+	write `MUNICIPIO DEL DOMICILIO*`
+	read (datosafiliado.municipio)
+	
+	Fecha()
+       guardar()
+       insertarnodo_reg()
+		
+	impresion()
+	menu()
+end
+
+procedure generarnodo_reg()
+begin
+estrindice_reg.folio:=datosafiliado.folio
+estrindice_reg.numregistro:=datosafiliado.numregistro
+estrindice_reg.izq0
+estrindice_reg.der0
+
+end
+
+
+
+
+procedure crear_esqueleto()
+begin
+	datosafiliado.nombre := ' '
+	datosafiliado.apellidop := ' '
+	datosafiliado.curp := ' '
+datosafiliado.folio:=1
+	datosafiliado.sexo := ' '
+	datosafiliado.numerodomicilio := 0;
+	datosafiliado.calle := ' '
+	datosafiliado.colonia := ' '
+	datosafiliado.municipio := ' '
+	datosafiliado.dia := 0;
+	datosafiliado.mes := 0;
+	datosafiliado.año := 0;
+	datosafiliado.ds := 0;
+	datosafiliado.dia2 := 0;
+	datosafiliado.mes2 := 0;
+	datosafiliado.año2 := 0;
+	datosafiliado.ds2 := 0;
+	datosafiliado.llave:= 0;
+	datosafiliado.numregistro:= 0;
+	
+	open(arcsalida/lectura-escritura)
+	
+	for i=1 to tam do
+		write(datosafiliado,arcsalida)
+	end
+	
+	close(arcsalida)
+
+end
+
+procedure guardar()
+begin
+open(arcsalida/escritura-lectura)
+contador0
+mientras (temp.numregistro<>0;)do 
+read(temp,arcsalida)
+contadorcontador+1
+end mientras
+	datosafiliado.numregistrocontador
+     go to(arcsalida,contador)
+	write(datosafiliado,arcsalida)
+close(arcsalida)
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+procedure insetrarnodo_reg()
+var
+direccion:integer;
+dierccion2:integer;
+begin
+direccion=1
+    Generarnodo_reg()
+
+open(arcindice/lectura-escritura)
+	
+read(temp,arcindice)
+
+if temp.llave=0; do
+		go to(arcindice,1)
+		write(estrindice_reg,arcindice)
+if no
+		Mientras (direccion<>0;) do
+			Dirección2direccion
+			go to(arcindice,direccion2)
+			read(temp,arcindice)
+			if ( estrindice_reg.llave<temp.llave)then
+			Dirección:=temp.der
+		if no
+			Direccióntemp.izq
+		end if
+    		end mientras
+
+Direccion0
+go to(arcindice,1)
+
+Mientras (temp.llave<>0;)hace
+Direcciondireccion+1
+ read(temp,arcindice)
+end mientras
+
+go to(arcindice,direccion)
+write(estrindice_reg,arcindice)
+go to(arcindice,direccion2)
+read(temp,arcindice)
+go to(arcindice,direccion2)
+if ( estrindice_reg.llave<temp.llave) then
+				Temp.derdireccion
+			if no
+				Temp.izqdireccion
+			end if
+write(temp,aecindice)
+close (arcindice)
+end
+
+
+
+

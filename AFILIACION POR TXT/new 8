@@ -1,0 +1,255 @@
+PROGRAM:
+*/Diseño
+Pseudocódigo
+ENCABEZADO
+Nombre: CUBETAS 
+Autor: COWORKERS COMPANY
+Fecha de creación: 03/04/2019
+Fecha de última modificación: 03/04/2019
+
+Types
+datosafiliadoest = Record
+	folio: integer;
+	nombre:string; 
+	apellidop:string; 
+	apellidom:string; 
+	curp:string; 
+	sexo: string; 
+	numerodomicilio:integer;
+	calle:string; 
+	colonia:string; 
+	municipio:string; 
+	estado:boolean;
+	dia,mes,anio,ds:integer; 
+	dia2,mes2,anio2,ds2:integer;  
+end
+var
+	Arcsalida: file of datosafiliadoest
+	datosafiliado:datosafiliadoest 
+	temp:datosafiliadoest
+	clave2:string; 
+	correcto: integer;
+	seleccion:integer;
+	respuesta:integer;
+	tam:integer;
+	tamanioreal:integer;
+	reasignacion:integer;
+	pormediocolision:integer;
+	bloque:integer;
+
+
+program: RegistroSeguroPopular
+begin
+	Promediocolision:=5;
+Tam:=500
+	tamanioreal := tam*promediocolision;
+	Menú ()  		;
+	
+end				
+procedure menu();
+var
+	seleccion: integer;
+begin
+	write    “BIENVENIDO”;
+write  ` ESCRIBE EL NUMERO DEL procedure A REALIZAR”;
+	write  ` 1: AFILIACION”;
+	write  ` 2: create Esqueleto`;
+	read selección;
+	case selección do
+		1: afiliarse ();
+		2: crear_esqueleto();
+		De otro modo: Menú ()	;
+	end case
+end
+procedure crear_esqueleto ()
+begin
+	datosafiliado.nombre := ' ';
+	datosafiliado.apellidop := ' ';
+	datosafiliado.apellidom:=' ';
+	datosafiliado.curp := ' ';
+	datosafiliado.sexo := ' ';
+	datosafiliado.numerodomicilio := 0;
+	datosafiliado.calle := ' ';
+	datosafiliado.colonia := ' ';
+	datosafiliado.municipio := ' ';
+	datosafiliado.estado := false;
+	datosafiliado.dia := 0;
+	datosafiliado.mes := 0;
+	datosafiliado.año := 0;
+	datosafiliado.ds := 0;
+	datosafiliado.dia2 := 0;
+	datosafiliado.mes2 := 0;
+	datosafiliado.año2 := 0;
+	datosafiliado.ds2 := 0;
+	
+create(`Registro Esqueleto`,arcsalida);
+open(arcsalida/lectura-escritura);
+
+
+for i=1 to tamanioreal do
+	write(datosafiliado,arcsalida);
+end
+	close(arcsalida);
+end
+
+
+procedure afiliarse()
+var
+	respuesta:integer;
+begin
+	write `Ingrese Curp`;
+	read(clave2);
+	correcto:=buscarcurp();	
+	
+if correcto = 1 then
+	write ` ya se encuentra en el sistema`;
+	menu()		;
+end		
+
+	datosafiliado.curp := clave2
+	
+	write(`Digite Nombre completo`)	
+	read(datosafiliado.nombre)
+	
+	write(`Sexo 1.-Hombre    2.-Mujer`)
+	read respuesta
+	if (respuesta=1)then
+		datosafiliado.sexo := `Hombre`
+	else
+		 datosafiliado.sexo := `Mujer`
+	end
+
+	write `NUMERO DEL DOMICILIO”
+	read (datosafiliado.numerodomicilio)
+	
+	write `CALLE DEL DOMICILIO*`
+	read (datosafiliado.calle)
+
+	write `COLONIA DEL DOMICILIO*`
+	read (datosafiliado.colonia)
+
+write `MUNICIPIO DEL   DOMICILIO`
+	read (datosafiliado.municipio)
+	
+	fecha()
+
+	datosafiliado.estado:=Verdadero         
+	
+	open(arcsalida/lectura-escritura)
+
+bloque := datosafiliado.numerodomicilio mod tam 
+	
+	guardar()
+	impresion()
+
+
+
+
+
+
+	
+end
+procedure guardar()
+
+begin
+open(arcsalida/lectura-escritura)
+ reasignacion:=1+((bloque-1)promediocolisiones)	
+go to(arcsalida,reasignacion)
+
+mientras (temp.folio<>datosafiliado.folio)do
+ 
+ go to(arcsalida,reasignacion)
+  read(temp,arcsalida)
+
+if (temp.direccion<>0;)then
+
+reasignación:=reasignacion +1
+if no
+go to(arcsalidaarcslida,reasignacion)
+write(datosafiliado,arcsalida)
+end if
+
+end mientras
+close (arcsalida)
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+end
+function buscarcurp():integer;
+
+begin
+	contador:=1
+	open(arcsalida/lectura-escritura)
+	
+	while not EOF ( arcsalida
+		read( temp,arcsalida )
+		contador :=contador+1
+	endmientras	
+	
+	if (temp.nombre = clave2) then
+		buscarcurp := 1
+	else
+		buscarcurp := 0;
+	end
+	
+	close(arcsalida)
+	
+end
+
+
+
+
+
+
+procedure impresion()
+
+begin
+
+write `NOMBRE COMPLETO `+ datosafiliado.nombre
+write `APELLIDO PATERNO` + datosafiliado.apellidop
+write `APELLIDO MATERNO` +	datosafiliado.apellidom
+write `CLAVE DE ELECTOR ` + datosafiliado.clave
+write `CLAVE CURP ` + datosafiliado.curp
+write `DOMICILIO ` + datosafiliado.domicilio + datosafiliado.calle + datosafiliado.colonia + datosafiliado.municipio
+write `Sexo:` + datosafiliado.sexo
+write `FOlIO DE AFILIACION ` + datosafiliado.folio
+write `SITUACIÓN`+datosafiliado.situacion
+
+end
+

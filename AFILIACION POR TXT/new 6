@@ -1,0 +1,285 @@
+PROGRAM:
+*/Diseño
+Pseudocódigo
+ENCABEZADO
+Nombre: RegistroSeguroPopularCRUD 
+Autor: COWORKERS COMPANY
+Fecha de creación: 27/04/2019
+Fecha de última modificación: 01/04/2019
+
+Types
+datosafiliadoest = Record
+	folio: integer;
+	nombre:string;
+	apellidop:string;
+	apellidom:string;
+	curp:string;
+	sexo: string;
+	numerodomicilio:integer;
+	calle:string;
+	colonia:string;
+	municipio:string;
+	estado:boolean;
+	dia,mes,anio,ds:integer; 
+	dia2,mes2,anio2,ds2:integer;  
+end
+var
+	Arcsalida: file of datosafiliadoest
+	arcfolio: archivo
+	datosafiliado:datosafiliadoest 
+	temp:datosafiliadoest
+	linea:string;
+	clave2:string;
+	contador: integer;
+	i: integer;
+	correcto: integer;
+	nombreclave:string;
+	apellidopclave:string;
+	apellidomclave:string;
+	seleccion:integer;
+	respuesta:integer;
+	tam:integer;
+	reasignacion:integer;
+	
+	FUNCIONES
+procedure afiliarse()
+procedure menu()
+function buscarcurp():integer;
+procedure guardar(contador:integer;)
+procedure impresion()
+
+
+
+
+program: RegistroSeguroPopular
+
+begin
+	tam := 500
+	Menú ()  							
+ 	
+end
+
+function buscarcurp():integer;
+
+begin
+	contador:=0;
+	
+	open(arcsalida/lectura-escritura)
+	
+	while not EOF ( arcsalida
+		read( temp,arcsalida )
+		contador :=contador+1
+	endmientras	
+	
+	if (temp.nombre = clave2) then
+		buscarcurp := 1
+	else
+		buscarcurp := 0;
+	end
+	
+	close(arcsalida)
+	
+end
+
+
+procedure menú()
+
+var
+	seleccion: integer;
+	
+begin
+write    “BIENVENIDO”
+write  ` ESCRIBE EL NUMERO DEL ROCEDIMIENTO A 
+				REALIZAR”
+write  ` 1: AFILIACION”
+write  ` 2: create Esqueleto`
+	read selección
+	
+	case selección do
+		1: afiliarse ()							
+		2: crear_esqueleto()
+		De otro modo: Menú ()					
+	end case
+	
+end
+
+
+
+
+
+
+
+
+
+
+procedure crear_esqueleto()
+
+begin
+	
+	datosafiliado.nombre := ' '
+	datosafiliado.apellidop := ' '
+	datosafiliado.curp := ' '
+	datosafiliado.sexo := ' '
+	datosafiliado.numerodomicilio := 0;
+	datosafiliado.calle := ' '
+	datosafiliado.colonia := ' '
+	datosafiliado.municipio := ' '
+	datosafiliado.estado := false
+	datosafiliado.dia := 0;
+	datosafiliado.mes := 0;
+	datosafiliado.año := 0;
+	datosafiliado.ds := 0;
+	datosafiliado.dia2 := 0;
+	datosafiliado.mes2 := 0;
+	datosafiliado.año2 := 0;
+	datosafiliado.ds2 := 0;
+	
+	create(`Registro Esqueleto`,arcsalida)
+	open(arcsalida/lectura-escritura)
+	
+	for i=1 to tam do
+		if (i = 1) then
+			datosafiliado.folio:=tam
+			write(datosafiliado,arcsalida)
+		else
+			datosafiliado.folio:=0;
+			write(datosafiliado,arcsalida)
+		end
+	end
+	
+	close(arcsalida)
+
+end
+procedure impresion()
+
+begin
+
+write `NOMBRE COMPLETO `+ 
+			datosafiliado.nombre
+write `CLAVE DE ELECTOR ` + datosafiliado.clave
+write `CLAVE CURP ` + datosafiliado.curp
+write `DOMICILIO ` + datosafiliado.domicilio + 
+			datosafiliado.calle + datosafiliado.colonia + 
+			datosafiliado.municipio
+write `Sexo:` + datosafiliado.sexo
+write `FOlIO DE AFILIACION ` + datosafiliado.folio
+write `SITUACIÓN`+datosafiliado.situacion
+
+end
+
+
+procedure guardar()
+
+begin
+open(arcsalida)	
+mientras ((temp.nuerodomicilio<>0;) o 
+                   (reasignacion<>posicion)) do
+		
+				reasignacion:=reasignacion +1
+				
+				if (reasignacion>tam) then
+					reasignacion:= 1
+				end
+			
+			go to(arcsalida,reasignacion)
+			read(temp,arcsalida)
+		
+end mientras
+			
+		if(temp.numerodomicilio=0;)then
+				go to(arcsalida,reasignacion)
+				write(datosafiliado,arcsalida)
+		end if
+		if(reasignacion=posicion)then
+			write `El record esta lleno`
+end if
+		
+		menú()
+
+ close(arcsalida)
+end
+
+
+
+procedure posicion_dig_centrales()
+var
+	p:string;
+	i:integer;
+t:real
+begin
+	
+	open(arcsalida/lectura-escritura)
+	clave2 := (clave2)^2
+	convertir integer a string(clave2)
+t<-(longitud(clave2)/2)-1
+
+	for i=1 to t+2 do
+	p:=p+clave2[i]
+	end for
+convertir p a etero
+
+		reasignacion:=p
+		iraregistro(arcsalida,reasignacion)
+		read(temp,arcsalida)
+
+
+
+end
+
+procedure afiliarse()
+
+var
+	respuesta:integer;
+
+
+begin
+	write `Ingrese Curp`
+	read(cdatosafiliado.curp)
+	correcto:=buscarcurp()	
+	
+	if correcto = 1 then
+		write ` ya se encuentra en el sistema`
+		menu()		
+	end		
+
+	write(`Digite Nombre completo`)	
+	read(datosafiliado.nombre)
+	
+	write(`Sexo 1.-Hombre    2.-Mujer`)
+	read respuesta
+
+	if (respuesta=1)then
+		datosafiliado.sexo := `Hombre`
+	else
+		 datosafiliado.sexo := `Mujer`
+	end
+
+	write `NUMERO DEL DOMICILIO”
+	read (datosafiliado.numerodomicilio)
+
+write `CALLE DEL DOMICILIO*`
+	read (datosafiliado.calle)
+
+	write `COLONIA DEL DOMICILIO*`
+	read (datosafiliado.colonia)
+
+	write `MUNICIPIO DEL DOMICILIO*`
+	read (datosafiliado.municipio)
+	clave2:=datosafiliado.numerodomicilio
+	fecha()
+
+	datosafiliado.estado:=Verdadero         
+	
+	open(arcsalida/lectura-escritura)
+ 
+	posición_dig_centrales()
+
+	go to(arcsalida,reasignacion)
+
+	read(temp,arcsalida)
+	
+	guardar()
+	impresion()
+	
+
+end

@@ -1,0 +1,338 @@
+
+PROGRAM:
+*/Diseño
+Pseudocódigo
+ENCABEZADO
+Nombre: archivo indexado 2
+Autor: COWORKERS COMPANY
+Fecha de creación: 10/04/2019
+Fecha de última modificación: 20/04/2019
+
+Types
+datosafiliadoest = Record
+	folio: integer;
+	nombre:string; 
+	apellidop:string; 
+	apellidom:string; 
+	curp:string; 
+llave:entera
+	sexo: string; 
+	numerodomicilio:integer;
+	calle:string; 
+	colonia:string; 
+	municipio:string; 
+	dia,mes,anio,ds:integer;
+	dia2,mes2,anio2,ds2:integer;
+	numregistro:integer; 
+end
+
+nodoarbol_dir=record
+	izq:^nodoarbol
+numregistro:integer;
+Llave:integer;
+Der:^nodoarbol
+end
+
+var
+	Arcsalida: file of datosafiliadoest
+	arcindice:file of nodoarbol_reg
+	estrindice_dir:nodoarbol_dir
+     X:^nodoarbol_dir
+     estrindice_reg:nodoarbol_reg
+	datosafiliado:datosafiliadoest 
+	temp:datosafiliadoest
+     Aux:^nodoarbol_dir
+Aux2:^nodoarbol_dir
+	linea:string; 
+	clave2:string; 
+	contador: integer;
+	i: integer;
+	correcto: integer;
+	nombreclave:string; 
+	apellidopclave:string; 
+	apellidomclave:string; 
+	seleccion:integer;
+	respuesta:integer;
+	tam:integer;
+	tamreal:integer;
+	promediocolisiones:integer;
+	reasignacion:integer;
+
+
+	FUNCIONES
+procedure afiliarse()
+procedure menu()
+function buscarcurp():integer;
+procedure guardar(contador:integer;)
+procedure impresion()
+program: RegistroSeguroPopular
+begin
+     Inicioprograma()
+	Menú ()  							
+end
+procedure menú()
+
+var
+	seleccion: integer;
+	
+begin
+write    “BIENVENIDO”
+write  ` ESCRIBE EL NUMERO DEL procedure A 
+				REALIZAR”
+write  ` 1: AFILIACION
+write “darse de baja”
+write “3: close program:
+	read selección
+	
+	case selección do
+		1: afiliarse ()		
+		2:eliminarnodo_dir()					
+          3: guardar_arbol()
+		De otro modo: Menú ()					
+	end case
+end
+
+procedure inicioPrograma()
+begin
+  Reservar(x)
+	tam  100
+asignar(‘Registroafiliados.dat’,arcsalida)
+
+if archivo (arcsalida) no existe then
+	create(‘Registroafiliados.dat’,arcsalida)
+ Crear_esqueleto()
+end if
+close(arcsalida)
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+procedure afiliarse()
+
+begin
+	write `Ingrese Curp`
+	read(datosafiliado.curp)
+	correcto:=buscarcurp()	
+
+	if correcto = 1 then
+		write ` ya se encuentra en el sistema`
+		menu()		
+	end		
+	write(`Digite Nombre completo`)	
+	read(datosafiliado.nombre)
+
+write(`Ingrese fecha de nacimiento dia/mes/año: como 051097`)
+	read(datosafiliado.llave)
+	
+	write(`Sexo 1.-Hombre    2.-Mujer`)
+	read respuesta
+
+	if (respuesta=1)then
+		datosafiliado.sexo := `Hombre`
+	else
+		 datosafiliado.sexo := `Mujer`
+	end
+
+	write `NUMERO DEL DOMICILIO”
+	read (datosafiliado.numerodomicilio)
+
+write `CALLE DEL DOMICILIO*`
+	read (datosafiliado.calle)
+
+	write `COLONIA DEL DOMICILIO*`
+	read (datosafiliado.colonia)
+
+	write `MUNICIPIO DEL DOMICILIO*`
+	read (datosafiliado.municipio)
+	
+	Fecha()
+       guardar()
+       insertarnodo_dir()
+		
+	impresion()
+	menu()
+
+end
+
+procedure generarnodo_dir()
+begin
+	
+estrindice_dir.folio:=datosafiliado.folio
+estrindice_dir.numregistro:=datosafiliado.numregistro
+estrindice_dir.antnulo
+estrindice_dir.signulo
+
+end
+
+
+procedure crear_esqueleto()
+begin
+	datosafiliado.nombre := ' '
+	datosafiliado.apellidop := ' '
+	datosafiliado.curp := ' '
+datosafiliado.folio:=1
+	datosafiliado.sexo := ' '
+	datosafiliado.numerodomicilio := 0;
+calle := ' '
+	datosafiliado.colonia := ' '
+	datosafiliado.municipio := ' '
+	datosafiliado.dia := 0;
+	datosafiliado.mes := 0;
+	datosafiliado.año := 0;
+	datosafiliado.ds := 0;
+	datosafiliado.dia2 := 0;
+	datosafiliado.mes2 := 0;
+	datosafiliado.año2 := 0;
+	datosafiliado.ds2 := 0;
+	datosafiliado.llave:= 0;
+	datosafiliado.numregistro:= 0;
+	
+	open(arcsalida/lectura-escritura)
+	
+	for i=1 to tam do
+		write(datosafiliado,arcsalida)
+	end
+	
+	close(arcsalida)
+end
+procedure guardar()
+begin
+open(arcsalida/escritura-lectura)
+contador0
+mientras (temp.numregistro<>0;)do 
+read(temp,arcsalida)
+contadorcontador+1
+end mientras
+	datosafiliado.numregistrocontador
+     go to(arcsalida,contador)
+	write(datosafiliado,arcsalida)
+close(arcsalida)
+end
+
+procedure insetrarnodo_dir()
+begin
+    generarnodo_dir()
+     if x= nulo do
+     		 X^estrindice_dir
+     if no
+Auxx
+mientras (aux<>nulo)
+aux2aux
+
+if( estrindice_dir.llave<aux^.llave ) then
+			auxaux^.izq
+		else
+			aux:=aux^.der
+end if
+end mietras
+
+if( estrindice_dir.llave <aux2^.llave ) then
+		aux2^.izqestrindice_dir
+	else
+		aux2^.derestrindice_dir
+end if
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+procedure eliminarnodo_dir()
+
+begin
+	write(Ingresa “llave”)
+	read(clave2)
+	aux:=x
+	
+	mientras(aux^.folio<>clave2)o(aux=nulo)do
+				aux2:=aux
+
+		if(aux^.folio<clave2)then
+			aux:=aux^.izq
+		else
+			
+			aux:=aux^.der
+		end
+
+	end mientras
+
+	if(aux^.folio=clave2)then
+	    if(aux.folio<aux2.folio)
+			
+			aux2.izq:=aux.izq
+			    if (aux.der<>nulo) then
+					aux2:=aux2.izq.der
+					
+					mientras (aux2.der<>nulo) do
+					 aux2.der:=aux2.der.der
+					end mientras
+					
+					aux2.der:=aux.der
+				end if
+		if no
+			aux2.der:=aux.der
+				if (aux.izq<>nulo)then
+					aux2:=aux2.der.izq
+					
+					mientras (aux2.izq<>nulo) do
+					 aux.izq:=aux2.izq.izq
+					end mientras
+					
+					aux2.izq:=aux.izq
+				end if		
+		end if
+		
+	if no
+		write('No se encuentra afiliado')
+		menu()
+	end if
+
+end if
+
+end	

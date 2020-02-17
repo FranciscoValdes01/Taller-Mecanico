@@ -244,25 +244,25 @@ END;
 		RegAutomovil.NamePzs[33] := 'batería';
 		RegAutomovil.NamePzs[34] := 'estuche de herramientas';
 
-		WRITELN ('Por favor, ingrese los datos de su automovil…');
+		WRITELN (Utf8ToAnsi('Por favor, ingrese los datos de su automovil…'));
 		WRITELN ('Marca: ');
 		READLN (RegAutomovil.Marca);
 		WRITELN ('Modelo: ');
 		READLN (RegAutomovil.Modelo);
 		WRITELN ('Color: ');
 		READLN (RegAutomovil.Color);
-		WRITELN ('Año: ');
+		WRITELN (Utf8ToAnsi('Año: '));
 		READLN (RegAutomovil.Anio);
 		WRITELN ('No. de placas: ');
 		READLN (RegAutomovil.NoPlacas);
 		WRITELN ('No. de serie: ');
 		READLN (RegAutomovil.NoSerie);
 
-		WRITELN ('¿Utilizó refacciones?: ');
+		WRITELN (Utf8ToAnsi('¿Utilizó refacciones?: '));
 		READLN (Respuesta);
 		IF ((Respuesta = 'SI') OR (Respuesta = 'si')) THEN 
 		BEGIN
-			WRITELN ('Ingrese que refacciones utilizó seguido de su costo, separadas con una coma: ejemplo: balatas $250.00, manija $200.00');
+			WRITELN (Utf8ToAnsi('Ingrese que refacciones utilizó seguido de su costo, separadas con una coma: ejemplo: balatas $250.00, manija $200.00'));
 			READLN (Respuesta);
 
 			RegAutomovil.Refacciones := Respuesta;
@@ -276,11 +276,11 @@ END;
 
 		FOR Contador := 1 TO 24 DO
 		BEGIN
-			WRITELN ('¿Realizó ' + RegAutomovil.ServicesName[Contador] + '?');
+			WRITELN (Utf8ToAnsi('¿Realizó ' + RegAutomovil.ServicesName[Contador] + '?'));
 			READLN (Respuesta);
 			IF ((Respuesta = 'SI') OR (Respuesta = 'si')) THEN
 			BEGIN
-				WRITELN ('¿Cuál fue el costo del servicio?');
+				WRITELN (Utf8ToAnsi('¿Cuál fue el costo del servicio?'));
 				READLN (RegAutomovil.ServicesPrice[Contador]);
 			end; // FIN (SI)
 		end; // FIN (FOR)
@@ -289,7 +289,7 @@ END;
 
 		FOR Contador := 1 TO 34 DO
 		BEGIN
-			WRITELN ('¿El automóvil tiene ' + RegAutomovil.NamePzs[Contador] + '?');
+			WRITELN (Utf8ToAnsi('¿El automóvil tiene ' + RegAutomovil.NamePzs[Contador] + '?'));
 			READLN(Respuesta);
 			IF ((Respuesta = 'SI') OR (Respuesta ='si')) THEN
 			BEGIN
@@ -301,29 +301,29 @@ END;
 			end; // FIN (SI)
 		end; // FIN (FOR)
 
-		WRITELN ('¿Se realizaron cargos adicionales? SI/NO');
+		WRITELN (Utf8ToAnsi('¿Se realizaron cargos adicionales? SI/NO'));
 		READLN (Respuesta);
 
 		IF ((Respuesta = 'SI') OR (Respuesta = 'si')) THEN
 		BEGIN
-			WRITELN ('¿Cuál fue el costo de los cargos adicionales?');
+			WRITELN (Utf8ToAnsi('¿Cuál fue el costo de los cargos adicionales?'));
 			READLN (RegAutomovil.CargosAdicionales);
 		end; // FIN (SI)
 
-		WRITELN ('¿Utilizó grúa para transportar el automóvil?');
+		WRITELN (Utf8ToAnsi('¿Utilizó grúa para transportar el automóvil?'));
 		READLN(Respuesta);
 
 		IF ((Respuesta = 'si') OR (Respuesta = 'SI')) THEN
 		BEGIN
-			WRITELN ('Ingrese el costo del transporte en grúa: ');
+			WRITELN (Utf8ToAnsi('Ingrese el costo del transporte en grúa: '));
 			READLN(RegAutomovil.UsoGrua);
 		end; // FIN (SI)
 
-		WRITELN ('El cliente dejó anticipo? SI/NO ');
+		WRITELN (Utf8ToAnsi('El cliente dejó anticipo? SI/NO '));
 		READLN (Respuesta);
 		IF ((Respuesta = 'SI') OR (Respuesta ='si')) THEN
 		BEGIN
-			WRITELN ('¿Cuánto dinero dejó de anticipo?');
+			WRITELN (Utf8ToAnsi('¿Cuánto dinero dejó de anticipo?'));
 			READLN (RegAutomovil.Anticipo);
 		end; // FIN (SI)
 
@@ -346,19 +346,50 @@ END;
 	VAR
 		ArchivoAutos: FILE OF EstAutomovil;
 		RegAuto: EstAutomovil;
-
+		c:INTEGER;
 	BEGIN
 		ASSIGN(ArchivoAutos, 'Automoviles.dat');
 		RESET(ArchivoAutos);
 	    READ (ArchivoAutos, RegAuto);
 	    CLOSE(ArchivoAutos);
-
+	    c:=1;
 		WRITELN ('Marca: ' + RegAuto.Marca);
 		WRITELN ('Modelo: ' + RegAuto.Modelo);
 		WRITELN ('Color: ' + RegAuto.Color);
-		WRITELN ('Año: ', RegAuto.Anio);
+		WRITELN (Utf8ToAnsi('Año: '), RegAuto.Anio);
 		WRITELN ('No. de placas: ' + RegAuto.NoPlacas);
 		WRITELN ('No. de serie: ' + RegAuto.NoSerie);
+		WRITELN ('Refacciones: ' + RegAuto.Refacciones);  
+		WRITELN ('Mano de Obra: ',RegAuto.ManoObra);
+		WRITELN ('Piezas que contiene el carro');
+		while(c<=34) do
+		BEGIN
+			IF (RegAuto.EdoPzs[c] = TRUE) THEN
+			BEGIN
+				WRITELN(Utf8ToAnsi(RegAuto.NamePzs[c]));
+			END;
+			c:=c+1;
+		end;
+		c:=1;
+		WRITELN ('Servicios del auto y costos');
+		while(c<=24) do
+		BEGIN
+			IF (RegAuto.ServicesPrice[c] <> 0.0) THEN
+			BEGIN
+				WRITELN(Utf8ToAnsi(RegAuto.ServicesName[c])+': ',RegAuto.ServicesPrice[c]:0:2);
+			END;
+			c:=c+1;
+		end;
+	  
+		WRITELN('Total de servicios: ',RegAuto.TotalServicios:0:2); 
+		WRITELN('Total de refacciones',RegAuto.TotalRefacciones:0:2);   
+		WRITELN('Total mano de obra',RegAuto.TotalManoObra:0:2); 
+		WRITELN('Cargos: ',RegAuto.CargosAdicionales:0:2);  
+		WRITELN('Grua: ',RegAuto.UsoGrua:0:2);   
+		WRITELN('Subtotal: ',RegAuto.Subtotal:0:2);
+		WRITELN('Precio Final: ',RegAuto.PrecioFinal:0:2);   
+		WRITELN('Anticipo: ',RegAuto.Anticipo:0:2);   
+		WRITELN('Resta: ',RegAuto.Resta:0:2); 
 
 		READKEY;
 

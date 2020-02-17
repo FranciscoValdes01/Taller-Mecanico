@@ -332,7 +332,7 @@ END;
 	  	WRITE(arch,datos);
 	  	CLOSE(arch);
 	end;
-	
+
 	procedure CapturarSolicitud();
 	VAR
 		RegAutomovil: EstAutomovil;
@@ -476,11 +476,14 @@ END;
 
 		IF (Respuesta = 'SI') OR (Respuesta = 'si') THEN
 		BEGIN
-			RegAutomovil.MantElectGral := TRUE;
+			WRITELN("cuanto fue de ese servicio?");
+			READLN(Respuesta);
+			RegAutomovil.C_MantElectGral := (real) Respuesta;
+			//RegAutomovil.MantElectGral := TRUE;
 		END
 		ELSE
-		BEGIN
-			RegAutomovil.MantElectGral := FALSE;
+		BEGIN 
+			//RegAutomovil.MantElectGral := FALSE;
 		END;
 
 		WRITELN('Realizo Lavado de Inyectores al Automovil?');
